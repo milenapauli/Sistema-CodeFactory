@@ -1,0 +1,30 @@
+name: CI - Sistema CodeFactory
+
+on:
+  push:
+    branches:
+      - main
+      - desenvolvimento
+  pull_request:
+    branches:
+      - main
+      - desenvolvimento
+
+jobs:
+  validar-projeto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Verificar arquivos principais
+        run: |
+          test -f index.html
+          test -f css/style.css
+          test -f js/script.js
+          test -f Dockerfile
+          echo "Estrutura básica validada com sucesso."
+
+      - name: Construir imagem Docker
+        run: docker build -t sistema-codefactory:test .
