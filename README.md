@@ -25,12 +25,18 @@ O objetivo do projeto é demonstrar a adoção de práticas DevOps no desenvolvi
 ```text
 Sistema-CodeFactory/
 │
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
 ├── css/
 │   └── style.css
 │
 ├── js/
 │   └── script.js
 │
+├── Dockerfile
+├── LICENSE
 ├── index.html
 └── README.md
 ```
@@ -68,9 +74,29 @@ Também é possível utilizar uma extensão de servidor local, como o Live Serve
 
 ## Docker
 
-O projeto pode ser executado utilizando um container Docker.
+A aplicação também pode ser executada utilizando Docker.
 
-O Docker será utilizado para criar um ambiente padronizado para execução da aplicação, facilitando sua distribuição e evitando diferenças entre ambientes.
+Foi criado um `Dockerfile` utilizando a imagem Nginx para disponibilizar a aplicação web em um container.
+
+Para construir a imagem:
+
+```bash
+docker build -t sistema-codefactory .
+```
+
+Para executar o container:
+
+```bash
+docker run -d --name sistema-codefactory -p 8080:80 sistema-codefactory
+```
+
+Após iniciar o container, a aplicação pode ser acessada pelo navegador através de:
+
+```text
+http://localhost:8080
+```
+
+A utilização do Docker permite padronizar o ambiente de execução da aplicação e facilitar sua reprodução em diferentes ambientes.
 
 ## Controle de versão
 
@@ -86,8 +112,14 @@ Também foram utilizados commits, Pull Requests, merge e resolução de conflito
 
 ## Integração Contínua
 
-O projeto utilizará GitHub Actions para automatizar verificações do projeto e a construção da imagem Docker.
+O projeto utiliza GitHub Actions para realizar a Integração Contínua.
+
+O pipeline realiza a validação da estrutura básica do projeto e a construção da imagem Docker.
+
+A execução do pipeline ocorre automaticamente em alterações realizadas nas branches `main` e `desenvolvimento`, bem como em Pull Requests direcionados a essas branches.
 
 ## Licença
 
 Este projeto está disponível sob a licença MIT.
+
+A licença completa está disponível no arquivo `LICENSE`.
