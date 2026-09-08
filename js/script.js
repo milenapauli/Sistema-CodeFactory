@@ -30,7 +30,7 @@ function addTask() {
     listItem.appendChild(deleteButton);
 
     taskList.appendChild(listItem);
-    alert("Tarefa adicionada com sucesso!");
+    alert("Tarefa cadastrada com sucesso!");
     taskInput.value = "";
     taskInput.focus();
 }
